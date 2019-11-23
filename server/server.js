@@ -45,6 +45,16 @@ app.post('/add', addPlayer);
 app.post('/edit/:id', editPlayer);
 */
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+require("./routes/routers")(app, db);
 // set the app to listen on the port
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
